@@ -33,6 +33,8 @@ public:
 
     void addForce(MathLibrary::Vector2 Force);
 
+    void addBehaviour(Behaviour* behaviour);
+
 
 private:
    
