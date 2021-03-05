@@ -13,7 +13,7 @@ public:
 
 	MathLibrary::Vector2 calculateForce(Agent* agent) override;
 	
-	void update(float deltatime);
+	void update(Agent* agent, float deltatime) override;
 
 private:
 	float m_circleDistance;
