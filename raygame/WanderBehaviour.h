@@ -1,22 +1,22 @@
 #pragma once
 #include "SteeringBehaviour.h"
 
+class Actor;
+
 class WanderBehaviour :
 	public SteeringBehaviour
 {
 public:
 	WanderBehaviour();
 
-	WanderBehaviour(Agent* Target, float Radius, float WanderForces);
+	WanderBehaviour(Agent* agent, float CircleDistance, float WanderForces);
 
-	void setAngle();
-
-	MathLibrary::Vector2 calculateForce(Agent* Target) override;
+	MathLibrary::Vector2 calculateForce(Agent* agent) override;
 	
 	void update(float deltatime);
 
 private:
-	float circleRadius;
+	float m_circleDistance;
 
 	Agent* m_target;
 
