@@ -22,5 +22,4 @@ private:
 
 	Actor* m_target;
 
-	float m_seekForce;
 };

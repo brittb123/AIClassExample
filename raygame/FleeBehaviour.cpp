@@ -5,20 +5,20 @@
 FleeBehaviour::FleeBehaviour()
 {
 	m_target = nullptr;
-	m_fleeForce = 1;
+	setForce(1);
 }
 
 FleeBehaviour::FleeBehaviour(Actor* Target, float fleeforce)
 {
 	m_target = Target;
-	m_fleeForce = fleeforce;
+	setForce(fleeforce);
 }
 
 MathLibrary::Vector2 FleeBehaviour::calculateForce(Agent* agent)
 {
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(agent->getWorldPosition() - m_target->getWorldPosition());
 
-	MathLibrary::Vector2 desiredVelocity = direction * m_fleeForce;
+	MathLibrary::Vector2 desiredVelocity = direction * getForce();
 
 	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();
 

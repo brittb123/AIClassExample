@@ -23,7 +23,7 @@ public:
 private:
 	Actor* m_target;
 
-	float m_fleeForce;
+	
 
 };
 

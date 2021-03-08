@@ -5,13 +5,13 @@
 SeekBehaviour::SeekBehaviour()
 {
 	m_target = nullptr;
-	m_seekForce = 1;
+	setForce(1);
 }
 
 SeekBehaviour::SeekBehaviour(Actor* Target, float Seekforce)
 {
 	m_target = Target;
-	m_seekForce = Seekforce;
+	setForce(Seekforce);
 }
 
 MathLibrary::Vector2 SeekBehaviour::calculateForce(Agent* agent)
@@ -19,7 +19,7 @@ MathLibrary::Vector2 SeekBehaviour::calculateForce(Agent* agent)
 
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition() - agent->getWorldPosition());
 
-	MathLibrary::Vector2 desiredVelocity = direction * m_seekForce;
+	MathLibrary::Vector2 desiredVelocity = direction * getForce();
 
 	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();
 

@@ -15,11 +15,13 @@ public:
 	
 	void update(Agent* agent, float deltatime) override;
 
+	void draw(Agent* agent) override;
+
 private:
 	float m_circleDistance;
 
 	Agent* m_target;
 
-	float m_wanderForce;
+
 };
 
