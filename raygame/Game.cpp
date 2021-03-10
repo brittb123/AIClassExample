@@ -5,6 +5,7 @@
 #include "SeekBehaviour.h"
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
+#include "SimpleEnemy.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -34,16 +35,17 @@ void Game::start()
 	m_camera->zoom = 1;
 	Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
 	Agent* enemy = new Agent(15, 15, 1, "Images/Enemy.png", 10, 10);
+	SimpleEnemy* enemy2 = new SimpleEnemy(18, 18, 3, "Images/Enemy.png", player, 1, 1);
 
 	FleeBehaviour* Flee = new FleeBehaviour(player);
 	SeekBehaviour* Seek = new SeekBehaviour(player);
+
 	
-	
-	enemy->addBehaviour(Flee);
+	enemy->addBehaviour(Seek);
 	
 	Scene* scene = new Scene();
 	scene->addActor(player);
-	scene->addActor(enemy);
+	scene->addActor(enemy2);
 
 	addScene(scene);
 	SetTargetFPS(60);
