@@ -19,7 +19,16 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 {
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(agent->getWorldPosition() - m_target->getWorldPosition());
 
-	MathLibrary::Vector2 Circle = (agent->getWorldPosition() + direction) * m_circleDistance;
+	MathLibrary::Vector2 DesiredVel = (direction + agent->getForward()) * m_circleDistance;
 	
-	
+	MathLibrary::Vector2 Force = DesiredVel / .5;
+
+	return Force;
 }
+
+void WanderBehaviour::update(Agent* agent, float deltatime)
+{
+	if (agent)
+		agent->addForce(calculateForce(agent));
+}
+

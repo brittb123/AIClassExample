@@ -15,8 +15,6 @@ public:
 	
 	void update(Agent* agent, float deltatime) override;
 
-	void draw(Agent* agent) override;
-
 private:
 	float m_circleDistance;
 
