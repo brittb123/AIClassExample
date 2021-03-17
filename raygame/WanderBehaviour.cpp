@@ -19,7 +19,9 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 {
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(agent->getWorldPosition() - m_target->getWorldPosition());
 
-	MathLibrary::Vector2 DesiredVel = (direction + agent->getForward()) * m_circleDistance;
+	MathLibrary::Vector2 Random = MathLibrary::Vector2(cos(rand()), sin(rand()));
+
+	MathLibrary::Vector2 DesiredVel = (direction * m_circleDistance);
 	
 	MathLibrary::Vector2 Force = DesiredVel / .5;
 

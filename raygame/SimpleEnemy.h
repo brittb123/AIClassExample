@@ -11,10 +11,10 @@ class WanderBehaviour;
 
 class SeekBehaviour;
 
-
 class SimpleEnemy :
 	public Enemy
 {
+public:
 
 	using Enemy::Enemy;
 

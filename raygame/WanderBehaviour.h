@@ -1,6 +1,7 @@
 #pragma once
 #include "SteeringBehaviour.h"
 
+
 class Actor;
 
 class WanderBehaviour :
@@ -22,4 +23,6 @@ private:
 
 
 };
+
+
 

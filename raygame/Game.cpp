@@ -6,6 +6,11 @@
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
 #include "SimpleEnemy.h"
+#include "ComplexEnemy.h"
+#include "evadeBehaviour.h"
+#include "DecisionBehaviour.h"
+#include "PursueDecision.h"
+#include "Graph.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -26,6 +31,7 @@ Game::Game()
 
 void Game::start()
 {
+
 	int screenWidth = Game::getScreenWidth();
 	int screenHeight = Game::getScreenHeight();
 
@@ -33,30 +39,38 @@ void Game::start()
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
-	Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
-	Agent* enemy = new Agent(15, 15, 1, "Images/Enemy.png", 10, 10);
-	SimpleEnemy* enemy2 = new SimpleEnemy(18, 18, 3, "Images/Enemy.png", player, 1, 1);
-
-	FleeBehaviour* Flee = new FleeBehaviour(player);
-	SeekBehaviour* Seek = new SeekBehaviour(player);
-
 	
-	enemy->addBehaviour(Seek);
-	
+	//Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
+	//Agent* enemy = new Agent(15, 15, 1, "Images/Enemy.png", 10, 10);
+	//SimpleEnemy* enemy2 = new SimpleEnemy(18, 18, 3, "Images/Enemy.png", player, 1, 1);
+	//ComplexEnemy* complexEnemy = new ComplexEnemy(5, 5, 2, "Images/Enemy.png", player, 1, 1);
+	//PursueDecision* pursue = new PursueDecision();
+	//evadeBehaviour* evade = new evadeBehaviour();
+	//DecisionBehaviour* decisionBeh = new DecisionBehaviour(pursue);
+
+	//complexEnemy->addBehaviour(decisionBeh);	
+	//
+	// PathFinding Scene
+	Graph* graph = new Graph(5, 5, 5, 1);
+
+	Scene* pathFinding = new Scene();
+	addScene(pathFinding);
+	pathFinding->addActor(graph);
+
+
+	// Behaviour Scene
 	Scene* scene = new Scene();
-	scene->addActor(player);
-	scene->addActor(enemy2);
+	/*scene->addActor(player);
+	scene->addActor(enemy);
+	scene->addActor(enemy2);*/
 
-	addScene(scene);
+	/*addScene(scene);*/
 	SetTargetFPS(60);
 }
 
 void Game::update(float deltaTime)
 {
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->update(deltaTime);
-	}
+	getCurrentScene()->update(deltaTime);
 }
 
 void Game::draw()
@@ -66,10 +80,7 @@ void Game::draw()
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
 
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->draw();
-	}
+	getCurrentScene()->draw();
 
 	EndMode2D();
 	EndDrawing();

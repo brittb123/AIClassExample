@@ -34,7 +34,11 @@ void Agent::update(float deltatime)
 	//Update  Forces
 	for (int i = 0; i < m_behaviours.size(); i++)
 	{
-		m_behaviours[i]->update(this, deltatime);
+		if (m_behaviours[i]->getEnabled())
+		{
+			m_behaviours[i]->update(this, deltatime);
+		}
+		
 	}
 
 	updateFacing();

@@ -68,21 +68,23 @@ void SimpleEnemy::update(float deltatime)
 	// A switch statement that goes off by the check target in sight
 	switch (checkTargetinSight())
 	{
+
 	// When the case is true then Wander is set to equal 0 and seek is set to be the current state 
 	case true:
 		WANDER == 0;
 		SEEK == 1;
-		m_currentstate == SEEK;
+		m_currentstate = SEEK;
 		break;
 
 		// The default case is set to be Wander eqauling 1 and the current state  to be set as Wander until player is in enemy's sight
 	default:
 		WANDER == 1;
 		SEEK == 0;
-		m_currentstate == WANDER;
+		m_currentstate = WANDER;
 		break;
 
 	}
+
 	Enemy::update(deltatime);
 }
 
