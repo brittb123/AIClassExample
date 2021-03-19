@@ -72,6 +72,50 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 
 }
 
+std::vector<Node*> Graph::dijkstra(int startX, int startY, int goalX, int goalY)
+{
+	Node* StartNode = getNode(startX, startY);
+
+	Node* GoalNode = getNode(goalX, goalY);
+	if (!StartNode || !GoalNode)
+		return;
+
+	StartNode->color = ColorToInt(GREEN);
+
+	Node* Current = StartNode;
+
+	std::deque<Node*> open;
+
+	std::deque<Node*> closed;
+
+	open.push_front(StartNode);
+
+	while (open.size() != 0)
+	{
+
+		// Sort items by g score
+
+		open.push_front(Current);
+
+		if (Current == GoalNode)
+		{
+			GoalNode->color = ColorToInt(RED);
+			return std::vector<Node*>();
+		}
+
+		open.pop_front();
+
+		closed.push_front(Current);
+
+		for (int i = 0; i < Current->edge.size(); i++)
+		{
+			Node* EndEdge = Current->e;
+		}
+	}
+
+	return std::vector<Node*>();
+}
+
 Node* Graph::getNode(int xPos, int yPos)
 {
 	if (xPos < 0 || yPos < 0 || xPos > m_width || yPos > m_height)

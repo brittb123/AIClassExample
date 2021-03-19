@@ -13,6 +13,7 @@ public:
 	void update(float deltatime) override;
 
 	void BFS(int startX, int startY, int goalX, int goalY);
+	std::vector<Node*> dijkstra(int startX, int startY, int goalX, int goalY);
 
 	Node* getNode(int xPos, int yPos);
 
