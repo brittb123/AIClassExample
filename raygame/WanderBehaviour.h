@@ -10,6 +10,8 @@ class WanderBehaviour :
 public:
 	WanderBehaviour();
 
+	WanderBehaviour(Actor* target, float seekForce = 1);
+
 	WanderBehaviour(Agent* agent, float CircleDistance, float WanderForces);
 
 	MathLibrary::Vector2 calculateForce(Agent* agent) override;
@@ -19,8 +21,9 @@ public:
 private:
 	float m_circleDistance;
 
-	Agent* m_target;
+	Actor* m_target;
 
+	float m_angle;
 
 };
 

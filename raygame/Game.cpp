@@ -40,31 +40,34 @@ void Game::start()
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
 	
-	//Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
-	//Agent* enemy = new Agent(15, 15, 1, "Images/Enemy.png", 10, 10);
-	//SimpleEnemy* enemy2 = new SimpleEnemy(18, 18, 3, "Images/Enemy.png", player, 1, 1);
-	//ComplexEnemy* complexEnemy = new ComplexEnemy(5, 5, 2, "Images/Enemy.png", player, 1, 1);
-	//PursueDecision* pursue = new PursueDecision();
-	//evadeBehaviour* evade = new evadeBehaviour();
-	//DecisionBehaviour* decisionBeh = new DecisionBehaviour(pursue);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 2, 10);
+	Agent* enemy = new Agent(15, 15, 1, "Images/Enemy.png", 10, 10);
+	SimpleEnemy* enemy2 = new SimpleEnemy(18, 18, 3, "Images/Enemy.png", player, 1, 1);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(5, 5, 2, "Images/Enemy.png", player, 1, 1);
+	PursueDecision* pursue = new PursueDecision();
+	evadeBehaviour* evade = new evadeBehaviour();
+	DecisionBehaviour* decisionBeh = new DecisionBehaviour(pursue);
+	WanderBehaviour* wander = new WanderBehaviour(player);
 
 	//complexEnemy->addBehaviour(decisionBeh);	
 	//
 	// PathFinding Scene
-	Graph* graph = new Graph(5, 5, 5, 1);
+	/*Graph* graph = new Graph(5, 5, 5, 1);*/
 
-	Scene* pathFinding = new Scene();
-	addScene(pathFinding);
-	pathFinding->addActor(graph);
+	//Scene* pathFinding = new Scene();
+	//addScene(pathFinding);
+	//pathFinding->addActor(graph);
 
+	enemy->addBehaviour(wander);
 
 	// Behaviour Scene
 	Scene* scene = new Scene();
-	/*scene->addActor(player);
+	setCurrentScene(0);
+	scene->addActor(player);
 	scene->addActor(enemy);
-	scene->addActor(enemy2);*/
+	/*scene->addActor(enemy2)*/;
 
-	/*addScene(scene);*/
+	addScene(scene);
 	SetTargetFPS(60);
 }
 

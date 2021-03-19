@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "Edge.h"
 #include <raylib.h>
+#include <deque>
 
 Graph::Graph(int width, int height, int nodeSize, int nodeSpacing)
 {
@@ -34,6 +35,41 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 		return;
 
 	start->color = ColorToInt(GREEN);
+	start->visited = true;
+	Node* current = start;
+
+	std::deque<Node*> queue;
+	queue.push_front(start);
+
+	while (!queue.empty())
+	{
+		current = queue[0];
+		queue.pop_front();
+
+		if (current == goal)
+		{
+			current->color - ColorToInt(YELLOW);
+			return;
+
+		}
+
+		for (int i = 0; i < current->edge.size(); i++)
+		{
+			Node* currentEdge = nullptr;
+			if (current == current->edge[i]->connectednode2)
+				currentEdge = current->edge[i]->connectednode1;
+			else
+				currentEdge = currentEdge->edge[i]->connectednode2;
+
+			if(!currentEdge->visited)
+			{
+				currentEdge->color = ColorToInt(RED);
+				currentEdge->visited = true;
+				queue.push_back(currentEdge);
+			}
+		}
+	}
+
 }
 
 Node* Graph::getNode(int xPos, int yPos)

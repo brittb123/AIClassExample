@@ -1,5 +1,6 @@
 #pragma once
 #include "ABDecision.h"
+#include "SteeringBehaviour.h"
 class evadeBehaviour :
 	public ABDecision
 {
@@ -8,4 +9,6 @@ public:
 
 	void makeDecision(Agent* agent, float deltatime) override;
 };
+
+
 
